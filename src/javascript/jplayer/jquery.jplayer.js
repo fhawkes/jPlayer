@@ -1009,12 +1009,15 @@
 			if(this.require.audio) { // If a supplied format is audio
 				this.htmlElement.audio = document.createElement('audio');
 				this.htmlElement.audio.id = this.internal.audio.id;
+				this.htmlElement.audio.autoplay = this.options.autoPlay || false;
 				this.html.audio.available = !!this.htmlElement.audio.canPlayType && this._testCanPlayType(this.htmlElement.audio); // Test is for IE9 on Win Server 2008.
 			}
 			this.html.video.available = false;
 			if(this.require.video) { // If a supplied format is video
 				this.htmlElement.video = document.createElement('video');
 				this.htmlElement.video.id = this.internal.video.id;
+				this.htmlElement.video.playsInline = this.options.playsInline || false;
+				this.htmlElement.video.autoplay = this.options.autoPlay || false;
 				this.html.video.available = !!this.htmlElement.video.canPlayType && this._testCanPlayType(this.htmlElement.video); // Test is for IE9 on Win Server 2008.
 			}
 
