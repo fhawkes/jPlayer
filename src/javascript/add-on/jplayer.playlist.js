@@ -371,9 +371,9 @@
 					if(0 <= index && index < this.playlist.length) {
 						this.removing = true;
 
-						$(this.cssSelector.playlist + " li:nth-child(" + (index + 1) + ")").slideUp(this.options.playlistOptions.removeTime, function() {
-							$(this).remove();
+						var itemEl = $(this.cssSelector.playlist + " li:nth-child(" + (index + 1) + ")");
 
+						function removeFromPlaylist() {
 							if(self.shuffled) {
 								var item = self.playlist[index];
 								$.each(self.original, function(i) {
@@ -403,7 +403,15 @@
 							}
 
 							self.removing = false;
-						});
+						}
+						if (itemEl.length) {
+							$(this.cssSelector.playlist + " li:nth-child(" + (index + 1) + ")").slideUp(this.options.playlistOptions.removeTime, function() {
+								$(this).remove();
+								removeFromPlaylist();
+							});
+						} else {
+							removeFromPlaylist();
+						}
 					}
 					return true;
 				}
