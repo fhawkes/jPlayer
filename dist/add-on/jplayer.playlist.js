@@ -353,7 +353,7 @@
 				}
 			}
 		},
-		remove: function(index) {
+		remove: function(index, toSelect) {
 			var self = this;
 
 			if(index === undefined) {
@@ -389,7 +389,10 @@
 							}
 
 							if(self.original.length) {
-								if(index === self.current) {
+								if (typeof toSelect !== 'undefined' && toSelect < self.original.length) {
+									self.current = toSelect;
+									self.select(self.current);
+								} else if(index === self.current) {
 									self.current = (index < self.original.length) ? self.current : self.original.length - 1; // To cope when last element being selected when it was removed
 									self.select(self.current);
 								} else if(index < self.current) {
