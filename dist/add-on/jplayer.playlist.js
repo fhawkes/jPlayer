@@ -62,10 +62,10 @@
 		// Setup the css selectors for the extra interface items used by the playlist.
 		this.cssSelector.details = this.cssSelector.cssSelectorAncestor + " .jp-details"; // Note that jPlayer controls the text in the title element.
 		this.cssSelector.playlist = this.cssSelector.cssSelectorAncestor + " .jp-playlist";
-		this.cssSelector.next = this.cssSelector.cssSelectorAncestor + " .jp-next";
-		this.cssSelector.previous = this.cssSelector.cssSelectorAncestor + " .jp-previous";
-		this.cssSelector.shuffle = this.cssSelector.cssSelectorAncestor + " .jp-shuffle";
-		this.cssSelector.shuffleOff = this.cssSelector.cssSelectorAncestor + " .jp-shuffle-off";
+		this.cssSelector.next = this.cssSelector.cssSelectorAncestor + (this.cssSelector.next || " .jp-next");
+		this.cssSelector.previous = this.cssSelector.cssSelectorAncestor + (this.cssSelector.previous ||" .jp-previous");
+		this.cssSelector.shuffle = this.cssSelector.cssSelectorAncestor + (this.cssSelector.shuffleOn ||" .jp-shuffle");
+		this.cssSelector.shuffleOff = this.cssSelector.cssSelectorAncestor + (this.cssSelector.shuffleOff ||" .jp-shuffle-off");
 
 		// Override the cssSelectorAncestor given in options
 		this.options.cssSelectorAncestor = this.cssSelector.cssSelectorAncestor;
@@ -229,7 +229,7 @@
 				$(this.cssSelector.playlist + " ul").slideUp(displayTime, function() {
 					var $this = $(this);
 					$(this).empty();
-					
+
 					$.each(self.playlist, function(i) {
 						$this.append(self._createListItem(self.playlist[i]));
 					});
